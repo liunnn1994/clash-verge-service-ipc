@@ -115,6 +115,7 @@ impl PreparedCores {
             anyhow::ensure!(
                 [
                     format!("verge-mihomo{}", std::env::consts::EXE_SUFFIX),
+                    format!("verge-mihomo-stock{}", std::env::consts::EXE_SUFFIX),
                     format!("verge-mihomo-alpha{}", std::env::consts::EXE_SUFFIX)
                 ]
                 .contains(&core.name),
@@ -361,7 +362,7 @@ mod tests {
     #[test]
     fn preparation_attests_staged_bytes_before_elevation() -> Result<()> {
         let source = Staging::new()?;
-        let name = format!("verge-mihomo{}", std::env::consts::EXE_SUFFIX);
+        let name = format!("verge-mihomo-stock{}", std::env::consts::EXE_SUFFIX);
         let path = source.0.join("core with spaces and 'quotes'");
         std::fs::write(&path, b"abc")?;
         let plan = PreparedCores::new(

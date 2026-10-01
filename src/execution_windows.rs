@@ -53,7 +53,7 @@ pub(super) fn require_no_core_process(include_service: bool) -> Result<()> {
             .unwrap_or(entry.szExeFile.len());
         let name = String::from_utf16_lossy(&entry.szExeFile[..length]);
         // SCM can be stopped while a core from an earlier service process remains alive.
-        if ["verge-mihomo", "verge-mihomo-alpha"]
+        if ["verge-mihomo", "verge-mihomo-stock", "verge-mihomo-alpha"]
             .iter()
             .any(|core| name.eq_ignore_ascii_case(&format!("{core}.exe")))
             || (include_service && name.eq_ignore_ascii_case("clash-verge-service.exe"))

@@ -120,7 +120,7 @@ fn stage_binary(source: &Path, target: &Path) -> Result<PathBuf, Error> {
 }
 
 /// Allowlist for auto-staging; excludes other executables shipped beside the installer.
-const BUNDLED_CORE_NAMES: [&str; 2] = ["verge-mihomo", "verge-mihomo-alpha"];
+const BUNDLED_CORE_NAMES: [&str; 3] = ["verge-mihomo", "verge-mihomo-stock", "verge-mihomo-alpha"];
 
 fn core_file_name(stem: &str) -> String {
     if cfg!(windows) {

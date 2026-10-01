@@ -50,6 +50,7 @@ pub(super) async fn inspect(
 fn inspect_core(directory: &Path, required: &CoreRequirement) -> CoreAvailability {
     let allowed = [
         format!("verge-mihomo{}", std::env::consts::EXE_SUFFIX),
+        format!("verge-mihomo-stock{}", std::env::consts::EXE_SUFFIX),
         format!("verge-mihomo-alpha{}", std::env::consts::EXE_SUFFIX),
     ];
     if !allowed.contains(&required.name) {

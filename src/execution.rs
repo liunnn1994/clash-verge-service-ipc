@@ -271,7 +271,14 @@ fn require_no_unix_core_processes(processes: &str, include_service: bool) -> Res
         let executable = Path::new(process.trim());
         let name = executable.file_name().and_then(|name| name.to_str()).unwrap_or("");
         anyhow::ensure!(
-            !["verge-mihomo", "verge-mihomo-alpha", "verge-mihomo-al"].contains(&name),
+            ![
+                "verge-mihomo",
+                "verge-mihomo-stock",
+                "verge-mihomo-st",
+                "verge-mihomo-alpha",
+                "verge-mihomo-al"
+            ]
+            .contains(&name),
             "process {name} remains after IPC failure; refusing a second core"
         );
         if include_service && ["clash-verge-service", "clash-verge-ser"].contains(&name) {
@@ -350,9 +357,16 @@ mod tests {
     }
     #[cfg(all(unix, feature = "client"))]
     #[test]
-    fn linux_truncated_alpha_core_blocks_fallback() {
-        for ipc_failed in [false, true] {
-            assert!(require_no_unix_core_processes("verge-mihomo-al", ipc_failed).is_err());
+    fn stock_and_legacy_cores_block_fallback() {
+        for name in [
+            "verge-mihomo-stock",
+            "verge-mihomo-st",
+            "verge-mihomo-alpha",
+            "verge-mihomo-al",
+        ] {
+            for ipc_failed in [false, true] {
+                assert!(require_no_unix_core_processes(name, ipc_failed).is_err());
+            }
         }
     }
 
